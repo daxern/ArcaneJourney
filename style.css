@@ -1,0 +1,69 @@
+/*NOTE TO SELF :Refer to https://css-tricks.com/snippets/css/ for help */
+
+body{
+	margin:0px;
+	background-color:coral;
+	height:100%;
+	font-family: 'Lobster', cursive;
+}
+#header{
+	background-color:#FFD685;
+	color:white;
+	font-size: 35px;
+	text-align:center;
+	font-family: 'Lobster', cursive;
+	border: 2px dashed #fff;
+	text-shadow: -3px -2px #aa3030; /*#6bffb5 = GREEN SHADOW #aa3030 = RED SHADOW*/
+	padding: 20px;
+	border-radius: 10px;
+	line-height: 1.3em;
+	font-weight: bold;
+	box-shadow: 0 0 0 4px #FFD685, 2px 1px 6px 4px #FFD685; 
+	margin:11px;
+}
+#main{
+	color:yellow;
+	width:40%;
+	float:left;
+	min-height:100%;
+}
+#shop{
+	color:red;
+	width:35%;
+}
+#stats{
+	color:orange;
+	width:35%;
+}
+#menu{
+	width:25%;
+	color:red;
+	float:right;
+}
+#shop, #stats{
+	min-height:50px;
+	float:left;
+}
+#Clicker{
+	text-align:center;
+	font-family: 'Lobster', cursive;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	color:white;
+	font-size:40px;
+}
+#Clicker:hover{
+	cursor:pointer;
+}
+#totalPower{
+	text-align:center;
+	color:#6bffb5;
+	font-size:25px;
+}
+#CurrentPower{
+	color:#a5ffd2;
+}
