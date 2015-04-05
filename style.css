@@ -1,18 +1,21 @@
 /*NOTE TO SELF :Refer to https://css-tricks.com/snippets/css/ for help */
-
+html{
+	height:100%;
+}
 body{
 	margin:0px;
 	background-color:coral;
 	height:100%;
 	font-family: 'Lobster', cursive;
+	overflow-y:auto;
 }
 #header{
 	background-color:#FFD685;
 	color:white;
-	font-size: 35px;
+	font-size: 38px;
 	text-align:center;
 	font-family: 'Lobster', cursive;
-	border: 2px dashed #fff;
+	border: 3px dashed #fff;
 	text-shadow: -3px -2px #aa3030; /*#6bffb5 = GREEN SHADOW #aa3030 = RED SHADOW*/
 	padding: 20px;
 	border-radius: 10px;
@@ -22,32 +25,37 @@ body{
 	margin:11px;
 }
 #main{
-	color:yellow;
 	width:40%;
 	float:left;
-	min-height:100%;
-}
-#shop{
-	color:red;
-	width:35%;
-}
-#stats{
-	color:orange;
-	width:35%;
+	height:100%;
 }
 #menu{
-	width:25%;
-	color:red;
+	width:24%;
 	float:right;
 }
 #shop, #stats{
 	min-height:50px;
 	float:left;
+	width:34%
+}
+#shop, #stats, #menu{
+	background-color:khaki;
+	border-radius:5px;
+	color:#aa3030;
+	background-color:#f2c977;
+	line-height: 1.3em;
+	font-weight: bold;
+	box-shadow: 0 0 0 4px #FFD685, 2px 1px 6px 4px #FFD685; 
+	border: 2px dashed #ebebeb;
+	margin-right:2px;
+	margin-left:2px;
+	margin-bottom:8px;
+	margin-top:5px;
 }
 #Clicker{
 	text-align:center;
 	font-family: 'Lobster', cursive;
-	-webkit-touch-callout: none;
+	-webkit-touch-callout: none; /*Stops text from being highlighted/selected*/
 	-webkit-user-select: none;
 	-khtml-user-select: none;
 	-moz-user-select: none;
@@ -55,9 +63,11 @@ body{
 	user-select: none;
 	color:white;
 	font-size:40px;
+	transition: all .2s ease-in-out;
 }
 #Clicker:hover{
 	cursor:pointer;
+	transform: scale(1.1);
 }
 #totalPower{
 	text-align:center;
@@ -66,4 +76,10 @@ body{
 }
 #CurrentPower{
 	color:#a5ffd2;
+}
+p, b{
+	font-family: 'Droid Sans', sans-serif;
+}
+#mid{
+	height:100%;
 }
