@@ -31,13 +31,26 @@
 
 	<body>
 		<div id="header">CHRONIC CREATOR</div>
-		<div id="main">
+		<div id="main" style="height:100%;">
 			<div id="totalPower"><span id ="CurrentPower">0</span> Creation Power</div>
-			
-			<div id="Clicker" onClick="IncreasePower();">Channel Power</div>
+			<div id="ClickerContainer">
+				<div id="Clicker" onClick="IncreasePower();">Create</div>
+			</div>
 		</div>	
 		<div id="menu">Main Menu</div>
-		<div id="shop">SHOP</div>
-		<div id="stats">STATS</div>
+		<div id="mid">
+			<div id="shop">SHOP
+				<div id="building01">
+					<span id="Building1">0</span><b> Creation Crystals</b>
+					<br/>
+					<span id="buy" class="buy" onClick="BuyBuilding1();">BUY</span>
+					<p>Cost: <span id="Building1Cost">15<span></p>
+				</div>
+			</div>
+			<div id="stats">STATS
+				<br/>
+				<p>PPS: <span id="PowerPerSecond">0</span></p>
+			</div>
+		</div>
 	</body>
 </html>
