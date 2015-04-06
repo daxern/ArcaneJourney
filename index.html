@@ -30,24 +30,34 @@
 	</head>
 
 	<body>
-		<div id="header">CHRONIC CREATOR</div>
+		<div id="header">ARCANE JOURNEY</div>
 		<div id="main" style="height:100%;">
-			<div id="totalPower"><span id ="CurrentPower">0</span> Creation Power</div>
+			<div id="totalPower"><span id ="CurrentPower">0</span> Arcane Power</div>
 			<div id="ClickerContainer">
-				<div id="Clicker" onClick="IncreasePower();">Create</div>
+				<div id="Clicker" onClick="IncreasePower();">Cast Spell</div>
 			</div>
 		</div>	
 		<div id="menu">Main Menu</div>
 		<div id="mid">
-			<div id="shop">SHOP
+			<div id="shop"><h2>Rayne's Sorcery Store</h2>
 				<div id="building01">
-					<span id="Building1">0</span><b> Creation Crystals</b>
+					<span id="Building1">0</span><b> Magician's Ring</b>
 					<br/>
-					<span id="buy" class="buy" onClick="BuyBuilding1();">BUY</span>
+					<span id="buyBuilding1" class="buy" onClick="BuyBuilding1();">BUY</span>
 					<p>Cost: <span id="Building1Cost">15<span></p>
+				</div>
+				<div id="building02">
+					<span id="Building2">0</span><b> Arcane Tome</b>
+					<br/>
+					<span id="buyBuilding2" class="buy" onClick="BuyBuilding2();">BUY</span>
+					<p>Cost: <span id="Building2Cost">75<span></p>
 				</div>
 			</div>
 			<div id="stats">STATS
+				<br/>
+				<div id="CharacterName">
+					Wizard Name: <div id="WizardName" contenteditable="true" spellcheck="false">Zhen</div>
+				</div>
 				<br/>
 				<p>PPS: <span id="PowerPerSecond">0</span></p>
 			</div>
