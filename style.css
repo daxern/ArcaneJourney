@@ -83,3 +83,17 @@ p, b{
 #mid{
 	height:100%;
 }
+.buy{
+	font-family: 'Droid Sans', sans-serif;
+}
+.sell{
+	font-family: 'Droid Sans', sans-serif;
+}
+#WizardName{
+	display:inline-block;
+	color:#6bffb5;
+}
+#CharacterName{
+	background:none repeat scroll 0% 0% rgba(255, 104, 135, 0.4);
+	border-radius:10px;
+}
