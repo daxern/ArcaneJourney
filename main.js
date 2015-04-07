@@ -5,8 +5,8 @@ Make new mechanic
 Create other buildings
 PRESTIGE
 Save System
+ARCHANGEL ITEM
 */
-
 var power = 0;
 var mousepower = 1;
 var PowerPerSecond = 0;
@@ -53,6 +53,7 @@ function BuyBuilding1(){
 		Building1.cost = Math.floor(15 * Math.pow(1.1,Building1.qty));
 		document.getElementById("Building1").innerHTML = Building1.qty;
 		document.getElementById("Building1Cost").innerHTML = Building1.cost;
+		PPS;
 	}
 	else{
 		console.log("You don't have enough power!")
@@ -77,6 +78,7 @@ function BuyBuilding2(){
 		Building2.cost = Math.floor(75 * Math.pow(1.1,Building2.qty));
 		document.getElementById("Building2").innerHTML = Building2.qty;
 		document.getElementById("Building2Cost").innerHTML = Building2.cost;
+		PPS;
 	}
 	else{
 		console.log("You don't have enough power!")
@@ -90,14 +92,19 @@ function Building2Produce() {
 
 /*STATS*/
 function PPS(){
-	PowerPerSecond = Building1.qty * Building1.persec;
-	document.getElementById("PowerPerSecond").innerHTML = Round(PowerPerSecond, 10);
+	PowerPerSecond = (Building1.qty * Building1.persec)+(Building2.qty * Building2.persec);
+	document.getElementById("PowerPerSecond").innerHTML = RoundtoDecimal(PowerPerSecond, 10);
 }
 
 /*MISC*/
 function Round(input,forcedecimal) {
 	forcedecimal = Math.pow(10,0);
 	var result = Math.round(input * forcedecimal) / forcedecimal;
+	return result;
+}	
+function RoundtoDecimal(input,forcedecimal2) {
+	forcedecimal2 = Math.pow(10,1);
+	var result = Math.round(input * forcedecimal2) / forcedecimal2;
 	return result;
 }	
 
@@ -107,3 +114,5 @@ window.setInterval(function(){
 		PPS();
 		Building2Produce()
 }, 1000);
+
+setInterval(function () { SaveGame(); }, 100000);
