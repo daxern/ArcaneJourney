@@ -1,3 +1,8 @@
-# ChronicCreator
+# Arcane Journey
+~ALPHA~
+
 An Incremental Game
-Project intends to use the elements of Cookie Clicker, but to be made in a CREATION type theme.
+Playable at: http://daxern.github.io/ArcaneJourney
+
+Made by Daxern
+A game that is pretty much a budget version of Cookie Clicker, but with magic!
