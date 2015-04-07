@@ -1,3 +1,12 @@
+/*
+______                          
+|  _  \                         
+| | | |__ ___  _____ _ __ _ __  
+| | | / _` \ \/ / _ \ '__| '_ \ 
+| |/ / (_| |>  <  __/ |  | | | |
+|___/ \__,_/_/\_\___|_|  |_| |_|
+/*
+
 /*TODO:
 Create Achievements
 Create Upgrades
@@ -41,7 +50,7 @@ function Building() {
 }
 /*BUILDING 1*/
 window.Building1 = new Building();
-	Building1.name = "Creation Crystal";
+	Building1.name = "Magician's Ring";
 	Building1.cost = 15;
 	Building1.persec = 0.1;
 	Building1.qty = 0;
@@ -66,7 +75,7 @@ function Building1Produce() {
 }
 /*BUILDING 2*/
 window.Building2 = new Building();
-	Building2.name = "Creation Crystal";
+	Building2.name = "Arcane Tome";
 	Building2.cost = 75;
 	Building2.persec = 0.5;
 	Building2.qty = 0;
@@ -89,10 +98,59 @@ function Building2Produce() {
 	power = power + (Building2.qty * Building2.persec);
 	document.getElementById("CurrentPower").innerHTML = Round(power, 10);
 }
+/*BUILDING 3*/
+window.Building3 = new Building();
+	Building3.name = "Wanderer's Wand";
+	Building3.cost = 400;
+	Building3.persec = 3.5;
+	Building3.qty = 0;
 
+function BuyBuilding3(){
+	if(power >= Building3.cost){
+		power = power - Building3.cost;
+		Building3.qty = Building3.qty + 1;
+		Building3.cost = Math.floor(375 * Math.pow(1.1,Building3.qty));
+		document.getElementById("Building3").innerHTML = Building3.qty;
+		document.getElementById("Building3Cost").innerHTML = Building3.cost;
+		PPS;
+	}
+	else{
+		console.log("You don't have enough power!")
+	}
+}
+
+function Building3Produce() {
+	power = power + (Building3.qty * Building3.persec);
+	document.getElementById("CurrentPower").innerHTML = Round(power, 10);
+}
+/*BUILDING 4*/
+window.Building4 = new Building();
+	Building4.name = "Summoner's Staff";
+	Building4.cost = 2500;
+	Building4.persec = 10;
+	Building4.qty = 0;
+
+function BuyBuilding4(){
+	if(power >= Building4.cost){
+		power = power - Building4.cost;
+		Building4.qty = Building4.qty + 1;
+		Building4.cost = Math.floor(475 * Math.pow(1.1,Building4.qty));
+		document.getElementById("Building4").innerHTML = Building4.qty;
+		document.getElementById("Building4Cost").innerHTML = Building4.cost;
+		PPS;
+	}
+	else{
+		console.log("You don't have enough power!")
+	}
+}
+
+function Building4Produce() {
+	power = power + (Building4.qty * Building4.persec);
+	document.getElementById("CurrentPower").innerHTML = Round(power, 10);
+}
 /*STATS*/
 function PPS(){
-	PowerPerSecond = (Building1.qty * Building1.persec)+(Building2.qty * Building2.persec);
+	PowerPerSecond = (Building1.qty * Building1.persec)+(Building2.qty * Building2.persec)+(Building3.qty * Building3.persec)+(Building4.qty * Building4.persec);
 	document.getElementById("PowerPerSecond").innerHTML = RoundtoDecimal(PowerPerSecond, 10);
 }
 
@@ -111,8 +169,7 @@ function RoundtoDecimal(input,forcedecimal2) {
 /*TIMERS*/
 window.setInterval(function(){
 		Building1Produce();
-		PPS();
 		Building2Produce()
+		Building3Produce()
+		PPS();
 }, 1000);
-
-setInterval(function () { SaveGame(); }, 100000);
