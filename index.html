@@ -1,65 +1,94 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="X-UA-Compatible" content="chrome=1">
-		<meta name="viewport" content="width=640">
- 		<link rel="stylesheet" href="stylesheets/core.css" media="screen">
-		<link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)">
- 		<link rel="stylesheet" href="stylesheets/pygment_trac.css">
-		<script type="text/javascript" src="javascripts/modernizr.js"></script>
- 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
- 		<script type="text/javascript" src="javascripts/headsmart.min.js"></script>
- 		<script type="text/javascript">
- 		$(document).ready(function () {
- 		$('#main_content').headsmart()
-		- })
-		</script>
-	  <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-52657569-2', 'auto');
-      ga('send', 'pageview');
-    </script>
 		<meta charset="utf-8">
-		<title>Chronic Creator</title>
+		 <link href="Coding\favicon.ico" rel="icon" type="image/x-icon" />
+		<title>Arcane Journey</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript">
+		function tab(tab) {
+			document.getElementById('tab1').style.display = 'none';
+			document.getElementById('tab2').style.display = 'none';
+			document.getElementById('li_tab1').setAttribute("class", "");
+			document.getElementById('li_tab2').setAttribute("class", "");
+			document.getElementById(tab).style.display = 'block';
+			document.getElementById('li_'+tab).setAttribute("class", "active");
+		}
+		</script>
 	</head>
 
 	<body>
-		<div id="header">ARCANE JOURNEY</div>
+		<div id="header">ARCANE JOURNEY
+			<div class="ribbon-wrapper-green"><div class="ribbon-green">ALPHA</div></div>
+		</div>
 		<div id="main" style="height:100%;">
 			<div id="totalPower"><span id ="CurrentPower">0</span> Arcane Power</div>
 			<div id="ClickerContainer">
-				<div id="Clicker" onClick="IncreasePower();">Cast Spell</div>
+				<div id="Clicker" class="clickable" onClick="IncreasePower();">Cast Spell</div>
 			</div>
 		</div>	
-		<div id="menu">Main Menu</div>
+		<div id="menu"><h2>Main Menu</h2>
+			<span onClick="SaveGame();" class="clickable">SAVE</span>
+			<br/>
+			<span onClick="LoadGame();" class="clickable">LOAD</span>
+			<br/>
+			<span onClick="DeleteSave();" class="clickable"">Delete Save</span>
+		</div>
 		<div id="mid">
-			<div id="shop"><h2>Rayne's Sorcery Store</h2>
-				<div id="building01">
-					<span id="Building1">0</span><b> Magician's Ring</b>
-					<br/>
-					<span id="buyBuilding1" class="buy" onClick="BuyBuilding1();">BUY</span>
-					<p>Cost: <span id="Building1Cost">15<span></p>
-				</div>
-				<div id="building02">
-					<span id="Building2">0</span><b> Arcane Tome</b>
-					<br/>
-					<span id="buyBuilding2" class="buy" onClick="BuyBuilding2();">BUY</span>
-					<p>Cost: <span id="Building2Cost">75<span></p>
+			<div id="shop"><h2 class="SubHeading">Rayne's Sorcery Store</h2>
+			<br/>
+			<ul>
+				<li id="li_tab1" class="clickable"onclick="tab('tab1')" ><a>Tab 1</a></li>
+				<li id="li_tab2" class="clickable" onclick="tab('tab2')"><a>Tab 2</a></li>
+			</ul>
+			<br/>
+			<div id="Tabs">
+				<div id="Content_Area">
+					<div id="tab1">
+						<div id="Building1and2">
+						<div id="building01" class="Building">
+							<span id="Building1">0</span><b> Magician's Ring</b>
+							<br/>
+							<span id="buyBuilding1" class="buy clickable" onClick="BuyBuilding1();">BUY</span>
+							<p class="cost">Cost: <span id="Building1Cost">15<span></p>
+						</div>
+						<div id="building02" class="Building">
+							<span id="Building2">0</span><b> Arcane Tome</b>
+							<br/>
+							<span id="buyBuilding2" class="buy clickable" onClick="BuyBuilding2();">BUY</span>
+							<p class="cost">Cost: <span id="Building2Cost">75<span></p>
+						</div>
+						</div>
+					</div>
+					<div id="tab2" style="display: none;">
+						<div id="Building3and4">
+							<div id="building03" class="Building">
+								<span id="Building3">0</span><b> Summoner's Wand</b>
+								<br/>
+								<span id="buyBuilding3" class="buy clickable" onClick="BuyBuilding3();">BUY</span>
+								<p class="cost">Cost: <span id="Building3Cost">15<span></p>
+							</div>
+							<div id="building04" class="Building">
+								<span id="Building4">0</span><b> R</b>
+									<br/>
+									<span id="buyBuilding4" class="buy clickable" onClick="BuyBuilding4();">BUY</span>
+									<p class="cost">Cost: <span id="Building4Cost">75<span></p>
+							</div>
+						</div>			
+					</div>
 				</div>
 			</div>
-			<div id="stats">STATS
+			</div>
+			<div id="stats"><h2 class="SubHeading">STATS</h2>
 				<br/>
 				<div id="CharacterName">
 					Wizard Name: <div id="WizardName" contenteditable="true" spellcheck="false">Zhen</div>
 				</div>
 				<br/>
-				<p>PPS: <span id="PowerPerSecond">0</span></p>
+				<p>Spells Per Second: <span id="PowerPerSecond">0</span></p>
 			</div>
 		</div>
 	</body>
