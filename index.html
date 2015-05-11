@@ -4,14 +4,20 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta charset="utf-8">
 		<meta name=viewport content="width=device-width, initial-scale=1">
-		<meta name="Arcane Journey" content="An Incremental Game. Cast Spells, and Cast even more, then Cast LOTS" />
+		<meta name="Description" content="Arcane Journey, a quest for spell casting.">
+		<meta name="Author" content="Daniel Fonua | Daxern | daxern.github.io/ArcaneJourney">
 		<title>Arcane Journey</title>
-		<link href="images/avicon.ico" rel="icon" type="image/x-icon" />
+		<link href="images/favicon.ico" rel="icon" type="image/x-icon" />
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="main.js"></script>
+		
 		<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -34,9 +40,9 @@
 		<!--[if !IE]><!--><!--<![endif]-->
 	</head>
 
-	<body>
+		<body>
 		<div id="loader">
-			<img id="LoadingGif" src="images/ajax-loader.gif">
+			<img id="LoadingGif" src="images\ajax-loader.gif">
 			<h1 id="Loading">LOADING</h1>
 			<h2 id="LoadingText">If the Game is not loading, Please enable JAVASCRIPT</h2>
 		</div>
@@ -44,18 +50,47 @@
 			<div class="ribbon-wrapper-green"><div class="ribbon-green">ALPHA</div></div>
 		</div>
 		<div id="main" style="height:100%;">
-			<div id="CharacterName">Wizard Name: <input id="WizardName" maxlength="40" value="Alnwick"></div>
-			<div id="totalPower"><span id ="CurrentPower">0</span> Arcane Power</div>
-			<div id="ClickerContainer">
-				<div id="Clicker" class="clickable" onClick="IncreasePower();"><span style="position:relative;top:70px;z-index:100;font-size:60px;">Cast Spell</span>
-					<div id="BookImg" style="text-align:center;">
-						<img style="z-index:1; position:relative;margin-left: auto;margin-right: auto;"  src="images/Book.png" alt="Spell Book" height="200" width="300">
+			<div id="upgrades">
+				<div id ="UpgradeOne" class="Upgrade clickable" onclick="BuyUpgrade1();Upgrade1Enable();">
+					<p>Magic Click</p>
+					<span>100</span>
+				</div>
+				<div id ="UpgradeTwo" class="Upgrade clickable" onclick="BuyUpgrade2();Upgrade2Enable();">
+					<p>Spell Click</p>
+					<span>1,000</span>
+				</div>
+				<div id ="UpgradeThree" class="Upgrade clickable" onclick="BuyUpgrade3();Upgrade3Enable();">
+					<p>Arcane Click</p>
+					<span>10,000</span>
+				</div>
+				<div id ="UpgradeFour" class="Upgrade clickable" onclick="BuyUpgrade4();Upgrade4Enable();">
+					<p>Sorcerer Click</p>
+					<span>100,000</span>
+				</div>
+				<div id ="UpgradeFive" class="Upgrade clickable" onclick="BuyUpgrade5();Upgrade5Enable();">
+					<p>Divine Click</p>
+					<span>1,000,000</span>
+				</div>
+				<div id ="UpgradeSix" class="Upgrade clickable" onclick="BuyUpgrade6();Upgrade6Enable();">
+					<p>Golden Polish</p>
+					<span>150</span>
+				</div>
+			</div>
+			<div id="HideUpgrades">Toggle Upgrades</div>
+			<div id="mainclicker">
+				<div id="CharacterName"><h3 id="WizardNameMain">Wizard Name: </h3>
+				
+					<input id="WizardName" maxlength="40" placeholder="No Name" value="Alnwick"></div>
+				<div id="totalPower"><span id ="CurrentPower">0</span> Arcane Power</div>
+				<div id="ClickerContainer">
+					<div id="Clicker" class="clickable" onClick="IncreasePower();"><span style="position:relative;top:70px;z-index:100;font-size:60px;">Cast Spell</span>
+						<div id="BookImg" style="text-align:center;">
+							<img style="z-index:1; position:relative;margin-left: auto;margin-right: auto;"  src="images/Book.png" alt="Spell Book" height="200" width="300">
+						</div>
 					</div>
 				</div>
 			</div>
 			
-			
-			<div id="upgrades"></div>
 		</div>	
 		<div id="menu">
 			<div id="MainMenu">
@@ -64,151 +99,154 @@
 					<br/>
 					<span onClick="LoadGame();" class="clickable droid">LOAD</span>
 					<br>
-					<span onClick="DeleteSave();" class="clickable droid">Delete Save </span>
+					<span onClick="ResetGame();" class="clickable droid">Delete Save </span>
 			</div>
-			</div>
+		</div>
 		<div id="mid">
 			<div id="shop"><h2 class="SubHeading">Rayne's Sorcery Store</h2>
-			<br/>
-			<ul>
-				<li id="li_tab1" class="clickable" onclick="tab('tab1')" ><a>Rings and Tomes (1)</a></li>
-				<li id="li_tab2" class="clickable" onclick="tab('tab2')"><a>Wands and Staffs (2)</a></li>
-				<li id="li_tab3" class="clickable" onclick="tab('tab3')"><a>Sceptres and Rods (3)</a></li>
-				<li id="li_tab4" class="clickable" onclick="tab('tab4')"><a>Crystals and Charms (4)</a></li>
-			</ul>
-			<br/>
-			<div id="Tabs">
-				<div id="Content_Area">
-					<div id="tab1">
-						<div id="Building1and2">
-						<div id="building01" class="Building wrapper">
-							<div class="tooltip">
-								<q>A ring that fell out of the sky</q>
-								<p>Spells Per Second: <span id="1SPS">0.1</span></p>
-								<p>Current Amount: <span id="1Qty">0</span></p>
-								<p>Power Produced Per Sec:  <span id="1CSPS">0</span></p>
+					<div class="triangles">
+						<ul class="triangle-links">
+							<li class="active1"><a href="#triangle1">Rings and Tomes (1)</a></li>
+							<li><a href="#triangle2">Wands and Staffs (2)</a></li>
+							<li><a href="#triangle3">Sceptres and Rods (3)</a></li>
+							<li><a href="#triangle4">Crystals and Charms (4)</a></li>
+						</ul>
+						<div class="triangle-content">
+							<div id="triangle1" class="triangle active1">
+								<div id="Building1and2">
+									<div id="building01" class="Building wrapper">
+										<div class="tooltip">
+											<q>An enchanting golden ring, from the Reign of the Aven Kings</q>
+											<p>Total Spells Per Second: <span id="1SPS">0</span></p>
+											<p>Current Level: <span id="1Qty">0</span></p>
+											<p>Power Production: <span id="1PP">0.1</span></p>
+										</div>
+										<b>Magician's Ring</b>
+										<p>LVL <span id="Building1">0</span></p> 
+										<img style="float:right;" class="BuildingPic" src="images/Ring.png" alt="Magician's Ring" height="70" width="50"> 
+										<br/>
+										<span id="buyBuilding1" class="buy clickable" onClick="BuyBuilding1();">UPGRADE</span>
+										<p class="cost">Cost: <span id="Building1Cost">15<span></p>
+									</div>
+									<div id="building02" class="Building wrapper">
+										<div class="tooltip">
+											<q>An Old Tome which contains ancient sorcerer knowledge</q>
+											<p>Total Spells Per Second: <span id="2SPS">0</span></p>
+											<p>Current Level: <span id="2Qty">0</span></p>
+											<p>Power Production: <span id="2PP">0.5</span></p>
+										</div>
+										<b>Arcane Tome</b>
+										<p>LVL <span id="Building2">0</span></p> 
+										<img style="float:right;" class="BuildingPic" src="images/Tome.png" alt="Arcane Tome" height="80" width="60">
+										<br/>
+										<span id="buyBuilding2" class="buy clickable" onClick="BuyBuilding2();">UPGRADE</span>
+										<p class="cost">Cost: <span id="Building2Cost">90<span></p>
+									</div>
+								</div>
 							</div>
-							<b>Magician's Ring</b>
-							<p>LVL <span id="Building1">0</span></p> 
-							<img style="float:right;" class="BuildingPic" src="images/Ring.png" alt="Magician's Ring" height="70" width="50"> 
-							<br/>
-							<span id="buyBuilding1" class="buy clickable" onClick="BuyBuilding1();">UPGRADE</span>
-							<p class="cost">Cost: <span id="Building1Cost">15<span></p>
+							<div id="triangle2" class="triangle">
+								<div id="Building3and4">
+									<div id="building03" class="Building wrapper">
+										<div class="tooltip">
+											<q>The Wand of the late Kyno, who single-handedly defended North Keep</q>
+											<p>Total Spells Per Second: <span id="3SPS">0</span></p>
+											<p>Current Level: <span id="3Qty">0</span></p>
+											<p>Power Production: <span id=" 3PP">4</span></p>
+										</div>
+										<b>Wanderer's Wand</b>
+										<p>LVL <span id="Building3">0</span></p> 
+										<img style="float:right;" class="BuildingPic" src="images/WizardWand.png" alt="Wanderer's Wand" height="80px" width="60px">
+										<br/>
+										<span id="buyBuilding3" class="buy clickable" onClick="BuyBuilding3();">UPGRADE</span>
+										<p class="cost">Cost: <span id="Building3Cost">450<span></p>
+									</div>
+									<div id="building04" class="Building wrapper">
+										<div class="tooltip">
+											<q>A Staff forged by the Extinct Sun Elves</q>
+											<p>Total Spells Per Second: <span id="4SPS">0</span></p>
+											<p>Current Level: <span id="4Qty">0</span></p>
+											<p>Power Production: <span id=" 4PP">16</span></p>
+										</div>
+										<b>Summoner's Staff</b>
+										<p>LVL <span id="Building4">0</span></p> 								
+										<img style="float:right;" class="BuildingPic" src="images/Staff.png" alt="Summoner's Staff" height="80px" width="60px">
+											<br/>
+											<span id="buyBuilding4" class="buy clickable" onClick="BuyBuilding4();">UPGRADE</span>
+											<p class="cost">Cost: <span id="Building4Cost">2,500<span></p>
+									</div>
+								</div>
+							</div>
+							<div id="triangle3" class="triangle">
+								<div id="Building5and6">
+									<div id="building05" class="Building wrapper">
+										<div class="tooltip">
+											<q>A Sceptre of Energy, recovered from the War of the Greater Beings</q>
+											<p>Total Spells Per Second: <span id="5SPS">0</span></p>
+											<p>Current Level: <span id="5Qty">0</span></p>
+											<p>Power Production: <span id="5PP">60</span></p>
+										</div>
+										<b>Spell-thief Sceptre</b>
+										<p>LVL <span id="Building5">0</span></p> 								
+										<img style="float:right;" class="BuildingPic" src="images/Sceptre.png" alt="Spell-thief Sceptre" height="90px" width="70px">
+										<br/>
+										<span id="buyBuilding5" class="buy clickable" onClick="BuyBuilding5();">UPGRADE</span>
+										<p class="cost">Cost: <span id="Building5Cost">9,000<span></p>
+									</div>
+									<div id="building06" class="Building wrapper">
+										<div class="tooltip">
+											<q>A Rod covered in Runes, unknown origin</q>
+											<p>Total Spells Per Second: <span id="6SPS">0</span></p>
+											<p>Current Level: <span id="6Qty">0</span></p>
+											<p>Power Production: <span id="6PP">300</span></p>
+										</div>
+										<span id="Building6">0</span><b> Runic Rod</b>
+											<br/>
+											<span id="buyBuilding6" class="buy clickable" onClick="BuyBuilding6();">UPGRADE</span>
+											<p class="cost">Cost: <span id="Building6Cost">30,000<span></p>
+									</div>
+								</div>	
+							</div>					 
+							<div id="triangle4" class="triangle">
+								<div id="Building7and8">
+									<div id="building07" class="Building wrapper">
+										<div class="tooltip">
+											<q>A Crystal of perfection, said to be made by Ryvin herself</q>
+											<p>Total Spells Per Second: <span id="7SPS">0</span></p>
+											<p>Current Level: <span id="7Qty">0</span></p>
+											<p>Power Production: <span id="7PP">3200</span></p>
+										</div>
+										<span id="Building7">0</span><b> Crystal of Conjuration</b>
+										<br/>
+										<span id="buyBuilding7" class="buy clickable" onClick="BuyBuilding7();">UPGRADE</span>
+										<p class="cost">Cost: <span id="Building7Cost">150,000<span></p>
+									</div>
+									<div id="building08" class="Building wrapper">
+										<div class="tooltip">
+											<q>A Charm forged from the Essence of dying stars</q>
+											<p>Total Spells Per Second: <span id="8SPS">0</span></p>
+											<p>Current Level: <span id="8Qty">0</span></p>
+											<p>Power Production: <span id="8PP">15500</span></p>
+										</div>
+										<span id="Building8">0</span><b> Celestial Charm</b>
+											<br/>
+											<span id="buyBuilding8" class="buy clickable" onClick="BuyBuilding8();">UPGRADE</span>
+											<p class="cost">Cost: <span id="Building8Cost">800,000<span></p>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div id="building02" class="Building wrapper">
-							<div class="tooltip">
-								<q>A Tome recovered from the Ancient Northern library</q>
-								<p>Spells Per Second: <span id="2SPS">0.5</span></p>
-								<p>Current Amount: <span id="2Qty">0</span></p>
-								<p>Power Produced Per Sec:  <span id="2CSPS">0</span></p>
-							</div>
-							<b>Arcane Tome</b>
-							<p>LVL <span id="Building2">0</span></p> 
-							<img style="float:right;" class="BuildingPic" src="images/Tome.png" alt="Arcane Tome" height="80" width="60">
-							<br/>
-							<span id="buyBuilding2" class="buy clickable" onClick="BuyBuilding2();">UPGRADE</span>
-							<p class="cost">Cost: <span id="Building2Cost">75<span></p>
-						</div>
-						</div>
 					</div>
-					<div id="tab2" style="display: none;">
-						<div id="Building3and4">
-							<div id="building03" class="Building wrapper">
-								<div class="tooltip">
-									<q>A Wand found in the Great Western forest.</q>
-									<p>Spells Per Second: <span id="3SPS">3.5</span></p>
-									<p>Current Amount: <span id="3Qty">0</span></p>
-									<p>Power Produced Per Sec:  <span id=" 3CSPS">0</span></p>
-								</div>
-								<b>Wanderer's Wand</b>
-								<p>LVL <span id="Building3">0</span></p> 
-								<img style="float:right;" class="BuildingPic" src="images/WizardWand.png" alt="Wanderer's Wand" height="80px" width="60px">
-								<br/>
-								<span id="buyBuilding3" class="buy clickable" onClick="BuyBuilding3();">UPGRADE</span>
-								<p class="cost">Cost: <span id="Building3Cost">450<span></p>
-							</div>
-							<div id="building04" class="Building wrapper">
-								<div class="tooltip">
-									<q>A Mysterious Staff with glowing Golden carvings.</q>
-									<p>Spells Per Second: <span id="4SPS">10</span></p>
-									<p>Current Amount: <span id="4Qty">0</span></p>
-									<p>Power Produced Per Sec:  <span id=" 4CSPS">0</span></p>
-								</div>
-								<b>Summoner's Staff</b>
-								<p>LVL <span id="Building4">0</span></p> 								
-								<img style="float:right;" class="BuildingPic" src="images/Staff.png" alt="Summoner's Staff" height="80px" width="60px">
-									<br/>
-									<span id="buyBuilding4" class="buy clickable" onClick="BuyBuilding4();">UPGRADE</span>
-									<p class="cost">Cost: <span id="Building4Cost">2,500<span></p>
-							</div>
-						</div>			
-					</div>
-					<div id="tab3" style="display: none;">
-						<div id="Building5and6">
-							<div id="building05" class="Building wrapper">
-								<div class="tooltip">
-									<q>A Sceptre that can harvest spell energy from the air.</q>
-									<p>Spells Per Second: <span id="5SPS">55</span></p>
-									<p>Current Amount: <span id="5Qty">0</span></p>
-									<p>Power Produced Per Sec:  <span id="5CSPS">0</span></p>
-								</div>
-								<b>Spell-thief Sceptre</b>
-								<p>LVL <span id="Building5">0</span></p> 								
-								<img style="float:right;" class="BuildingPic" src="images/Sceptre.png" alt="Spell-thief Sceptre" height="90px" width="70px">
-								<br/>
-								<span id="buyBuilding5" class="buy clickable" onClick="BuyBuilding5();">UPGRADE</span>
-								<p class="cost">Cost: <span id="Building5Cost">9,000<span></p>
-							</div>
-							<div id="building06" class="Building wrapper">
-								<div class="tooltip">
-									<q>A rod covered with runes. It emanates power.</q>
-									<p>Spells Per Second: <span id="6SPS">275</span></p>
-									<p>Current Amount: <span id="6Qty">0</span></p>
-									<p>Power Produced Per Sec:  <span id="6CSPS">0</span></p>
-								</div>
-								<span id="Building6">0</span><b> Runic Rod</b>
-									<br/>
-									<span id="buyBuilding6" class="buy clickable" onClick="BuyBuilding6();">UPGRADE</span>
-									<p class="cost">Cost: <span id="Building6Cost">30,000<span></p>
-							</div>
-						</div>			
-					</div>
-					<div id="tab4" style="display: none;">
-						<div id="Building7and8">
-							<div id="building07" class="Building wrapper">
-								<div class="tooltip">
-									<q>A perfect Crystal recovered from the ruins of the Old Sorcerer's Academy</q>
-									<p>Spells Per Second: <span id="7SPS">3000</span></p>
-									<p>Current Amount: <span id="7Qty">0</span></p>
-									<p>Power Produced Per Sec:  <span id="7CSPS">0</span></p>
-								</div>
-								<span id="Building7">0</span><b> Crystal of Conjuration</b>
-								<br/>
-								<span id="buyBuilding7" class="buy clickable" onClick="BuyBuilding7();">UPGRADE</span>
-								<p class="cost">Cost: <span id="Building7Cost">150,000<span></p>
-							</div>
-							<div id="building08" class="Building wrapper">
-								<div class="tooltip">
-									<q>A Charm forged created from the Essence of dying stars.</q>
-									<p>Spells Per Second: <span id="8SPS">15500</span></p>
-									<p>Current Amount: <span id="8Qty">0</span></p>
-									<p>Power Produced Per Sec:  <span id="8CSPS">0</span></p>
-								</div>
-								<span id="Building8">0</span><b> Celestial Charm</b>
-									<br/>
-									<span id="buyBuilding8" class="buy clickable" onClick="BuyBuilding8();">UPGRADE</span>
-									<p class="cost">Cost: <span id="Building8Cost">800,000<span></p>
-							</div>
-						</div>			
-					</div>
+			</div>
+			<div id="stats">
+				<h2 class="SubHeading">Statistics</h2>
+				<div id="mainstats">
+					<p>Spells Per Second: <span id="PowerPerSeconds">0</span></p>
+					<p>Spell Clicks: <span id="mouseclicks">0</span></p>
+					<p>Total Spell Power: <span id="TotalArcanePower">0</span></p>
+					<p>Play Time: <span id="PlayTime"></span></p>
 				</div>
-			</div>
-			</div>
-			<div id="stats"><h2 class="SubHeading">Statistics </h2>
-				<p>Spells Per Second: <span id="PowerPerSeconds">0</span></p>
-				<p>Spell Clicks: <span id="mouseclicks">0</span></p>
-				<p>Total Spell Power: <span id="TotalArcanePower">0</span></p>
-				<h2>Achievements</h2>
+				<div id="AchievementStats">
+					<h2>Achievements</h2>
 					<div class="squares">
 						<ul class="square-links">
 							<li class="actives"><a href="#square1">CLICK</a></li>
@@ -235,15 +273,15 @@
 									<p>Mousepower level 125</p>
 								</div>
 							</div>
-					 
+						 
 							<div id="square2" class="square">
 								<p>Miscellaneous Achievements!</p>
 							</div>
-					 
+						 
 							<div id="square3" class="square">
 								<p>Arcane Achievements!</p>
 							</div>
-					 
+						 
 							<div id="square4" class="square">
 								<p>Affinity Achievements!</p>
 							</div>
@@ -252,10 +290,8 @@
 				</div>
 			</div>
 		</div>
-		<div id="notifications">
-			<div id="AchievementOneNotification" class="notification"><p>Unlocked Achievement: POOF!</p></div>
-		</div>
-		<div class="footer"><p class="footer-text">Arcane Journey &copy Daniel Z. Fonua (Daxern) 2015</p>
+		<div class="footer"><p class="footer-text">Arcane Journey &copy Daniel Z. Fonua (Daxern) 2015</p></div>
 		
+			
 	</body>
 </html>
