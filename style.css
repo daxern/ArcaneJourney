@@ -56,12 +56,13 @@ body {
 
 #main {float: left;height: 100%;min-height: 600px;width: 39%;}
 
-#menu {float: right;width: 24%;}
+#menu {float: right;width: 23%;margin-right:10px;}
 
 #shop, #stats {
 	float: left;
 	min-height: 50px;
-	width: 34%
+	width: 34%;
+	margin-right: 2px;
  }
 
 #shop, #stats, #menu {
@@ -74,7 +75,6 @@ body {
 	line-height: 1.3em;
 	margin-bottom: 8px;
 	margin-left: 2px;
-	margin-right: 2px;
 	margin-top: 5px;
  }
  #stats{
@@ -94,8 +94,8 @@ body {
 	transition: all .2s ease-in-out;
 	user-select: none;
  }
- .clickable {cursor: pointer;}
- #Clicker:active {vertical-align: top;padding: 4px 7px 3px;}
+.clickable {cursor: pointer;}
+#Clicker:active {vertical-align: top;padding: 4px 7px 3px;}
 #Clicker:hover {cursor: pointer;transform: scale(1.1);}
 
 #totalPower {color: #6bffb5;font-size: 35px;text-align: center;}
@@ -128,7 +128,9 @@ body {
 	border:2px inset #a5ffd2;
 	text-align:center;
 	font-size:20px;
+	background-color:#FF605C;
 }
+#WizardNameMain {color:white; margin-bottom:5px;}
 
 #CharacterName {background: none repeat scroll 0% 0% rgba(255, 104, 135, 0.4);border-radius: 10px;text-align:center;color:white;}
 
@@ -266,7 +268,6 @@ body {
 }
 
 .wrapper .tooltip {
-  background: #red;
   bottom: 100%;
   color: #fff;
   display: block;
@@ -357,6 +358,7 @@ q{
 #totalPower{
 	margin-top:10px;
 }
+/*ACHIEVEMENT TABS*/
 .square {
     width:100%;
     display:inline-block;
@@ -375,14 +377,14 @@ q{
             padding:9px 15px;
             display:inline-block;
             border-radius:3px 3px 0px 0px;
-            background:#7FB5DA;
+            background:#60e5a2;
             font-size:16px;
             font-weight:600;
             color:#4c4c4c;
             transition:all linear 0.15s;
         }
         .square-links a:hover {
-            background:#a7cce5;
+            background:#6bffb5;
             text-decoration:none;
         }
  
@@ -398,7 +400,78 @@ q{
 .square {display:none;}
 .square.actives {display:inline-block;}
 
+/*SHOP TAB*/
+.triangle {
+    width:100%;
+    display:inline-block;
+}
+    .triangle-links:after {
+        display:block;
+        clear:both;
+        content:'';
+    }
+    .triangle-links li {
+        margin:0px 5px;
+        float:left;
+        list-style:none;
+    }
+        .triangle-links a {
+            padding:9px 15px;
+            display:inline-block;
+            border-radius:3px;
+            background:#7FB5DA;
+            font-size:16px;
+            font-weight:600;
+            color:#4c4c4c;
+            transition:all linear 0.15s;
+			margin:5px;
+        }
+        .triangle-links a:hover {
+            background:#a7cce5;
+            text-decoration:none;
+        }
+ 
+    li.active1 a, li.active1 a:hover {
+        background:#fff;
+        color:#4c4c4c;
+    } 
+.triangle {display:none;}
+.triangle.active1 {display:inline-block;}
+
 .notification{width:200px;}
 .AchievementPic{float:left;}
 .Achievement{display:inline-block; margin-bottom:20px;}
 h3{color:#CF0014}
+#upgrades{
+	overflow-y:hidden;
+	height:90px;
+	width:100%;
+}
+#upgrades:hover{
+	overflow:visible;
+	height:auto;
+}
+.Upgrade{
+	display:inline-block;
+	width:70px;
+	background:white;
+	margin:10px;
+	height:70px;
+	position:relative;
+	bottom:0px;
+	text-align:center;
+}
+#HideUpgrades{
+	text-align:center;
+	font-size:15px;
+	width:100%;
+	height:10px;
+	background-color:#60e5a2;
+	padding:10px;
+	color:white;
+	cursor:pointer;
+	margin-top:5px;
+}
+#HideUpgrades:hover{
+	background-color:#6bffb5;
+}
