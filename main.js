@@ -7,12 +7,11 @@ ______
 |___/ \__,_/_/\_\___|_|  |_| |_|
 
 TO-DO LIST:
-Create Achievements
-Create Upgrades
+Notifications
 On every power (10, 100, 1000 etc) reward magic affinity
 MAGIC AFFINITY
 PRESTIGE
-Save System
+AUTO LOAD SYSTEM
 ARCHANGEL ITEM
 KARMA SYSTEM
 CELESTIAL SYSTEM (SUN AND MOON)
@@ -31,9 +30,9 @@ function IncreasePower() {
 		player.power += player.mousepower;
 		player.mouseclicks++;
 		player.TotalArcanePower += player.mousepower;
-		document.getElementById('TotalArcanePower').innerHTML = RoundtoDecimal(player.TotalArcanePower, 10);
-		document.getElementById('CurrentPower').innerHTML = Round(player.power, 10);
-		document.getElementById('mouseclicks').innerHTML = Round(player.mouseclicks, 10);
+		document.getElementById('TotalArcanePower').innerHTML = RoundtoDecimal(player.TotalArcanePower, 0);
+		document.getElementById('CurrentPower').innerHTML = Round(player.power, 0);
+		document.getElementById('mouseclicks').innerHTML = Round(player.mouseclicks, 0);
 	}
 
 	/*BUILDINGS*/
@@ -43,7 +42,6 @@ function Building() {
 		this.cost = 10;
 		this.persec = 1;
 		this.qty = 0;
-		this.oldCost = 0;
 	}
 	/*BUILDING 1*/
 
@@ -67,7 +65,7 @@ function BuyBuilding1() {
 
 function Building1Produce() {
 		player.power = player.power + (Building1.qty * Building1.persec);
-		document.getElementById('CurrentPower').innerHTML = Round(player.power, 10);
+		document.getElementById('CurrentPower').innerHTML = Round(player.power, 0);
 	}
 	/*BUILDING 2*/
 
@@ -91,7 +89,7 @@ function BuyBuilding2() {
 
 function Building2Produce() {
 		player.power = player.power + (Building2.qty * Building2.persec);
-		document.getElementById('CurrentPower').innerHTML = Round(player.power, 10);
+		document.getElementById('CurrentPower').innerHTML = Round(player.power, 0);
 	}
 	/*BUILDING 3*/
 
@@ -115,7 +113,7 @@ function BuyBuilding3() {
 
 function Building3Produce() {
 		player.power = player.power + (Building3.qty * Building3.persec);
-		document.getElementById('CurrentPower').innerHTML = Round(player.power, 10);
+		document.getElementById('CurrentPower').innerHTML = Round(player.power, 0);
 	}
 	/*BUILDING 4*/
 
@@ -139,7 +137,7 @@ function BuyBuilding4() {
 
 function Building4Produce() {
 		player.power = player.power + (Building4.qty * Building4.persec);
-		document.getElementById('CurrentPower').innerHTML = Round(player.power, 10);
+		document.getElementById('CurrentPower').innerHTML = Round(player.power, 0);
 	}
 	/*BUILDING 5*/
 
@@ -163,7 +161,7 @@ function BuyBuilding5() {
 
 function Building5Produce() {
 		player.power = player.power + (Building5.qty * Building5.persec);
-		document.getElementById('CurrentPower').innerHTML = Round(player.power, 10);
+		document.getElementById('CurrentPower').innerHTML = Round(player.power, 0);
 	}
 	/*BUILDING 6*/
 
@@ -187,7 +185,7 @@ function BuyBuilding6() {
 
 function Building6Produce() {
 		player.power = player.power + (Building6.qty * Building6.persec);
-		document.getElementById('CurrentPower').innerHTML = Round(player.power, 10);
+		document.getElementById('CurrentPower').innerHTML = Round(player.power, 0);
 	}
 	/*BUILDING 7*/
 
@@ -211,7 +209,7 @@ function BuyBuilding7() {
 
 function Building7Produce() {
 		player.power = player.power + (Building7.qty * Building7.persec);
-		document.getElementById('CurrentPower').innerHTML = Round(player.power, 10);
+		document.getElementById('CurrentPower').innerHTML = Round(player.power, 0);
 	}
 	/*BUILDING 8*/
 
@@ -235,7 +233,7 @@ function BuyBuilding8() {
 
 function Building8Produce() {
 		player.power = player.power + (Building8.qty * Building8.persec);
-		document.getElementById('CurrentPower').innerHTML = Round(player.power, 10);
+		document.getElementById('CurrentPower').innerHTML = Round(player.power, 0);
 	}
 	/*UPGRADES*/
 	function Upgrade() {
@@ -277,14 +275,17 @@ function Building8Produce() {
 		if(player.power >= Upgrade1.cost){
 			Upgrade1.unlocked = true;
 			player.power -= Upgrade1.cost;
-			player.mousepower += 1;	
+			player.mousepower += 1;
+			UpdateView();
+			window.clearInterval(ColourTimer1);
 		}
 	}
 	function BuyUpgrade2(){
 		if(player.power >= Upgrade2.cost){
 			Upgrade2.unlocked = true;
 			player.power -= Upgrade2.cost;
-			player.mousepower += 3;	
+			player.mousepower += 3;
+			UpdateView();
 		}
 	}
 	function BuyUpgrade3(){
@@ -292,20 +293,23 @@ function Building8Produce() {
 			Upgrade3.unlocked = true;
 			player.power -= Upgrade3.cost;
 			player.mousepower += 10;	
+			UpdateView();
 		}
 	}
 	function BuyUpgrade4(){
 		if(player.power >= Upgrade4.cost){
 			Upgrade4.unlocked = true;
 			player.power -= Upgrade4.cost;
-			player.mousepower += 250;	
+			player.mousepower += 250;
+			UpdateView();			
 		}
 	}
 	function BuyUpgrade5(){
 		if(player.power >= Upgrade5.cost){
 			Upgrade5.unlocked = true;
 			player.power -= Upgrade5.cost;
-			player.mousepower += 10000;	
+			player.mousepower += 10000;
+			UpdateView();
 		}
 	}
 	function BuyUpgrade6(){
@@ -313,6 +317,7 @@ function Building8Produce() {
 			Upgrade6.unlocked = true;
 			player.power -= Upgrade6.cost;
 			Building1.persec += 0.2;
+			UpdateView();
 		}
 	}
 	function Upgrade1Enable(){
@@ -321,6 +326,38 @@ function Building8Produce() {
 		}
 		else{
 			document.getElementById('UpgradeOne').style.display = 'inline-block';
+		}
+	}
+	function Upgrade1Color(){
+		if(player.power >= Upgrade1.cost){
+			document.getElementById('UpgradeOne').style.backgroundColor= '#FFCC66';
+		}else{
+			document.getElementById('UpgradeOne').style.backgroundColor= 'white';
+		}
+		if(player.power >= Upgrade2.cost){
+			document.getElementById('UpgradeTwo').style.backgroundColor= '#FFCC66';
+		}else{
+			document.getElementById('UpgradeTwo').style.backgroundColor= 'white';
+		}
+		if(player.power >= Upgrade3.cost){
+			document.getElementById('UpgradeThree').style.backgroundColor= '#FFCC66';
+		}else{
+			document.getElementById('UpgradeThree').style.backgroundColor= 'white';
+		}
+		if(player.power >= Upgrade4.cost){
+			document.getElementById('UpgradeFour').style.backgroundColor= '#FFCC66';
+		}else{
+			document.getElementById('UpgradeFour').style.backgroundColor= 'white';
+		}
+		if(player.power >= Upgrade5.cost){
+			document.getElementById('UpgradeFive').style.backgroundColor= '#FFCC66';
+		}else{
+			document.getElementById('UpgradeFive').style.backgroundColor= 'white';
+		}
+		if(player.power >= Upgrade6.cost){
+			document.getElementById('UpgradeSix').style.backgroundColor= '#FFCC66';
+		}else{
+			document.getElementById('UpgradeSix').style.backgroundColor= 'white';
 		}
 	}
 	function Upgrade2Enable(){
@@ -451,66 +488,100 @@ function AchievementThree() {
 	/*MISC*/
 
 	function UpdateView(){
-		$('#TotalArcanePower').html(RoundtoDecimal(player.TotalArcanePower, 10));
-		$('#CurrentPower').html(Round(player.power, 10));
-		$('#mouseclicks').html(Round(player.mouseclicks, 10));
-		document.getElementById('PowerPerSeconds').innerHTML = RoundtoDecimal(player.PowerPerSecond, 10);
-		document.getElementById('Building1').innerHTML = Building1.qty;
-		document.getElementById('Building1Cost').innerHTML = Building1.cost.toLocaleString();
-		document.getElementById('1Qty').innerHTML = Round(Building1.qty);
-		document.getElementById('1SPS').innerHTML = RoundtoDecimal(Building1.qty * Building1.persec);
-		document.getElementById('1PP').innerHTML = RoundtoDecimal(Building1.persec);
-		document.getElementById('Building2').innerHTML = Building2.qty;
-		document.getElementById('Building2Cost').innerHTML = Building2.cost.toLocaleString();
-		document.getElementById('2Qty').innerHTML = Round(Building2.qty);
-		document.getElementById('2SPS').innerHTML = RoundtoDecimal(Building2.qty * Building2.persec);
-		document.getElementById('2PP').innerHTML = RoundtoDecimal(Building2.persec);
-		document.getElementById('Building3').innerHTML = Building3.qty;
-		document.getElementById('Building3Cost').innerHTML = Building3.cost.toLocaleString();
-		document.getElementById('3Qty').innerHTML = Round(Building3.qty);
-		document.getElementById('3SPS').innerHTML = RoundtoDecimal(Building3.qty * Building3.persec);
-		document.getElementById('3PP').innerHTML = RoundtoDecimal(Building3.persec);
-		document.getElementById('Building4').innerHTML = Building4.qty;
-		document.getElementById('Building4Cost').innerHTML = Building4.cost.toLocaleString();
-		document.getElementById('4Qty').innerHTML = Round(Building4.qty);
-		document.getElementById('4SPS').innerHTML = RoundtoDecimal(Building4.qty * Building4.persec);
-		document.getElementById('4PP').innerHTML = RoundtoDecimal(Building4.persec);
-		document.getElementById('Building5').innerHTML = Building5.qty;
-		document.getElementById('Building5Cost').innerHTML = Building5.cost.toLocaleString();
-		document.getElementById('5Qty').innerHTML = Round(Building5.qty);
-		document.getElementById('5SPS').innerHTML = RoundtoDecimal(Building5.qty * Building5.persec);
-		document.getElementById('5PP').innerHTML = RoundtoDecimal(Building5.persec);
-		document.getElementById('Building6').innerHTML = Building6.qty;
-		document.getElementById('Building6Cost').innerHTML = Building6.cost.toLocaleString();
-		document.getElementById('6Qty').innerHTML = Round(Building6.qty);
-		document.getElementById('6SPS').innerHTML = RoundtoDecimal(Building6.qty * Building6.persec);
-		document.getElementById('6PP').innerHTML = RoundtoDecimal(Building6.persec);
-		document.getElementById('Building7').innerHTML = Building7.qty;
-		document.getElementById('Building7Cost').innerHTML = Building7.cost.toLocaleString();
-		document.getElementById('7Qty').innerHTML = Round(Building7.qty);
-		document.getElementById('7SPS').innerHTML = RoundtoDecimal(Building7.qty * Building7.persec);
-		document.getElementById('7PP').innerHTML = RoundtoDecimal(Building7.persec);
-		document.getElementById('Building8').innerHTML = Building8.qty;
-		document.getElementById('Building8Cost').innerHTML = Building8.cost.toLocaleString();
-		document.getElementById('8Qty').innerHTML = Round(Building8.qty);
-		document.getElementById('8SPS').innerHTML = RoundtoDecimal(Building8.qty * Building8.persec);
-		document.getElementById('8PP').innerHTML = RoundtoDecimal(Building8.persec);
+		$('#TotalArcanePower').html(RoundtoDecimal(player.TotalArcanePower, 0));
+		$('#CurrentPower').html(Round(player.power, 0));
+		$('#mouseclicks').html(Round(player.mouseclicks, 0));
+		$('#PPC').html(Round(player.mousepower, 0));
+		$('#PowerPerSeconds').html(RoundtoDecimal(player.PowerPerSecond, 0));
+		$('#Building1').html(Building1.qty);
+		$('#Building1Cost').html(Building1.cost.toLocaleString());
+		$('#1Qty').html(Round(Building1.qty));
+		$('#1SPS').html(RoundtoDecimal(Building1.qty * Building1.persec));
+		$('#1PP').html(RoundtoDecimal(Building1.persec));
+		$('#Building2').html(Building2.qty);
+		$('#Building2Cost').html(Building2.cost.toLocaleString());
+		$('#2Qty').html(Round(Building2.qty));
+		$('#2SPS').html(RoundtoDecimal(Building2.qty * Building2.persec));
+		$('#2PP').html(RoundtoDecimal(Building2.persec));
+		$('#Building3').html(Building3.qty);
+		$('#Building3Cost').html(Building3.cost.toLocaleString());
+		$('#3Qty').html(Round(Building3.qty));
+		$('#3SPS').html(RoundtoDecimal(Building3.qty * Building3.persec));
+		$('#3PP').html(RoundtoDecimal(Building3.persec));
+		$('#Building4').html(Building4.qty);
+		$('#Building4Cost').html(Building4.cost.toLocaleString());
+		$('#4Qty').html(Round(Building4.qty));
+		$('#4SPS').html(RoundtoDecimal(Building4.qty * Building4.persec));
+		$('#4PP').html(RoundtoDecimal(Building4.persec));
+		$('#Building5').html(Building5.qty);
+		$('#Building5Cost').html(Building5.cost.toLocaleString());
+		$('#5Qty').html(Round(Building5.qty));
+		$('#5SPS').html(RoundtoDecimal(Building5.qty * Building5.persec));
+		$('#5PP').html(RoundtoDecimal(Building5.persec));
+		$('#Building6').html(Building6.qty);
+		$('#Building6Cost').html(Building6.cost.toLocaleString());
+		$('#6Qty').html(Round(Building6.qty));
+		$('#6SPS').html(RoundtoDecimal(Building6.qty * Building6.persec));
+		$('#6PP').html(RoundtoDecimal(Building6.persec));
+		$('#Building7').html(Building7.qty);
+		$('#Building7Cost').html(Building7.cost.toLocaleString());
+		$('#7Qty').html(Round(Building7.qty));
+		$('#7SPS').html(RoundtoDecimal(Building7.qty * Building7.persec));
+		$('#7PP').html(RoundtoDecimal(Building7.persec));
+		$('#Building8').html(Building8.qty);
+		$('#Building8Cost').html(Building8.cost.toLocaleString());
+		$('#8Qty').html(Round(Building8.qty));
+		$('#8SPS').html(RoundtoDecimal(Building8.qty * Building8.persec));
+		$('#8PP').html(RoundtoDecimal(Building8.persec));
 	}
 	function TotalProduce() {
 		Building1Produce() + Building2Produce() + Building3Produce() + Building4Produce() + Building5Produce() + Building6Produce() + Building7Produce() + Building8Produce();
 	}
-
-	function Round(input, forcedecimal) {
-		forcedecimal = Math.pow(10, 0);
-		var result = Math.round(input * forcedecimal) / forcedecimal;
-		return result;
-	}
-
 	function RoundtoDecimal(input, forcedecimal2) {
 			forcedecimal2 = Math.pow(10, 1);
 			var result = Math.round(input * forcedecimal2) / forcedecimal2;
 			return result;
 	}
+function Round(input, forcedecimal) {
+	if (input >= 1e6) {
+			if (input >= 1e6){
+			forcedecimal = 3 ;
+			}else{
+				forcedecimal =1;
+			}
+		var z = Math.floor(logFloor(input)/3);
+		var prefixes = [" Million"," Billion "," Trillion "," Quadrillion ",
+		" Quintillion "," Sextillion "," Septillion "," Octillion ",
+		" Nonillion "," Decillion "," Undecillion "," Doedecillion ",
+		" Tredecillion "," Quattuordecillion "," Quindecillion ",
+		" Sexdecillion "," Septendecillion "," Octodecillion "," Novemdecillion ",
+		" Vigintillion "," Unvigintillion "," Duovigintillion "," Tresvigintillion ",
+		" Quattuorvigintillion "," Quinquavigintillion "," Sesvigintillion "," Septemvigintillion ",
+		" Octovigintillion "," Novemvigintillion "," Trigintillion "," Untrigintillion ",
+		" Duotrigintillion "," Trestrigintillion "," Quattuortrigintillion "," Quinquatrigintillion ",
+		" Sestrigintillion "," Septentrigintillion "," Octotrigintillion "," Noventrigintillion ",
+		" Quadragintillion "," Unquadragintillion "," Duoquadragintillion "," Trequadragintillion ",
+		" Quattuorquadragintillion "," Quinquadragintillion  "," Sexquadragintillion "," Septquadragintillion, ",
+		" Octoquadragintillion "," Novemquadragintillion ", " Quinquagintillion ", " Unquinquagintillion  ",
+		" Duoquinquagintillion ", " Trequinquagintillion "];
+		var s = Round(input/Math.pow(10,3*z),forcedecimal);
+		return s+""+prefixes[z-2];
+	} else {
+		return numberWithCommas(input.toFixed(forcedecimal));
+	};
+};
+function numberWithCommas(forcedecimal) {
+	var parts = forcedecimal.toString().split(".");
+	return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+};
+function logFloor(x) {
+	var count = 0;
+	while (x >= 10) {
+		count++;
+		x /= 10;
+	};
+	return count;
+};
 
 	/*SAVE*/
 
@@ -611,14 +682,13 @@ var A2Timer = window.setInterval(function() {AchievementTwoGoal();	AchievementTw
 var A3Timer = window.setInterval(function() {AchievementThreeGoal();AchievementThree();}, 1000)
 var AutoSave = window.setInterval(function() {SaveGame();}, 30000)
 var PlayTimer = window.setInterval(function() {Playtime();}, 1000)
-var UpgradeTimer = window.setInterval(function() {
-		Upgrade1Enable();
-		Upgrade2Enable();
-		Upgrade3Enable();
-		Upgrade4Enable();
-		Upgrade5Enable();
-		Upgrade6Enable();
-	}, 1000);
+var UpgradeTimer1 = window.setInterval(function() {Upgrade1Enable();	}, 1000);
+var UpgradeTimer2 = window.setInterval(function() {Upgrade2Enable();}, 1000)
+var UpgradeTimer3 = window.setInterval(function() {Upgrade3Enable();}, 1000)
+var UpgradeTimer4 = window.setInterval(function() {Upgrade4Enable();}, 1000)
+var UpgradeTimer5 = window.setInterval(function() {Upgrade5Enable();}, 1000)
+var UpgradeTimer6 = window.setInterval(function() {Upgrade6Enable();}, 1000)
+var ColourTimer1 = window.setInterval(function() {Upgrade1Color();}, 1000)
 Timer1();
 
 $(document).ready(function() {
