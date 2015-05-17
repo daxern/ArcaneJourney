@@ -41,14 +41,14 @@
 	</head>
 
 		<body>
-		<div id="loader">
-			<img id="LoadingGif" src="images/ajax-loader.gif">
-			<h1 id="Loading">LOADING</h1>
-			<h2 id="LoadingText">If the Game is not loading, Please enable JAVASCRIPT</h2>
-		</div>
-		<div id="header">ARCANE JOURNEY
-			<div class="ribbon-wrapper-green"><div class="ribbon-green">ALPHA</div></div>
-		</div>
+			<div id="loader">
+				<img id="LoadingGif" src="images\ajax-loader.gif">
+				<h1 id="Loading">LOADING</h1>
+				<h2 id="LoadingText">If the Game is not loading, Please enable JAVASCRIPT</h2>
+			</div>
+			<div id="header">ARCANE JOURNEY
+				<div class="ribbon-wrapper-green"><div class="ribbon-green">ALPHA</div></div>
+			</div>
 		<div id="main" style="height:100%;">
 			<div id="upgrades">
 				<div id ="UpgradeOne" class="Upgrade clickable" onclick="BuyUpgrade1();Upgrade1Enable();">
@@ -85,7 +85,7 @@
 				<div id="ClickerContainer">
 					<div id="Clicker" class="clickable" onClick="IncreasePower();"><span style="position:relative;top:70px;z-index:100;font-size:60px;">Cast Spell</span>
 						<div id="BookImg" style="text-align:center;">
-							<img style="z-index:1; position:relative;margin-left: auto;margin-right: auto;"  src="images/Book.png" alt="Spell Book" height="200" width="300">
+							<img style="z-index:1; position:relative;margin-left: auto;margin-right: auto;"  src="images/Book.png" alt="Spell Book" id="Castbook">
 						</div>
 					</div>
 				</div>
@@ -240,9 +240,10 @@
 			<div id="stats">
 				<h2 class="SubHeading">Statistics</h2>
 				<div id="mainstats">
-					<p>Spells Per Second: <span id="PowerPerSeconds">0</span></p>
+					<p>Power Per Second: <span id="PowerPerSeconds">0</span></p>
+					<p>Power per Click: <span id="PPC">1</span></p>
 					<p>Spell Clicks: <span id="mouseclicks">0</span></p>
-					<p>Total Spell Power: <span id="TotalArcanePower">0</span></p>
+					<p>Power from Clicks: <span id="TotalArcanePower">0</span></p>
 					<p>Play Time: <span id="PlayTime"></span></p>
 				</div>
 				<div id="AchievementStats">
@@ -291,7 +292,5 @@
 			</div>
 		</div>
 		<div class="footer"><p class="footer-text">Arcane Journey &copy Daniel Z. Fonua (Daxern) 2015</p></div>
-		
-			
 	</body>
 </html>
