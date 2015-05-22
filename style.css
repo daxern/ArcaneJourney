@@ -80,7 +80,10 @@ body {
  #stats{
 	margin-bottom:15px;
  }
-
+#shop{
+	position:relative;
+	z-index:1;
+}
 #Clicker {
 	-khtml-user-select: none;
 	-moz-user-select: none;
@@ -93,6 +96,12 @@ body {
 	text-align: center;
 	transition: all .2s ease-in-out;
 	user-select: none;
+ }
+ #Caster{
+	 position:relative;
+	 top:1.3em;
+	 z-index:100;
+	 font-size:65px;
  }
 .clickable {cursor: pointer;}
 #Clicker:active {vertical-align: top;padding: 4px 7px 3px;}
@@ -224,7 +233,7 @@ body {
 	margin:0;
 	padding:0;
 	overflow:hidden;
-	z-index:100;
+	z-index:1000;
 }
 #LoadingGif{
 	margin-top:50px;
@@ -492,11 +501,37 @@ h3{color:#CF0014}
 }
 #notifications{
 	margin:auto;
-	overflow-y:hidden;
+	overflow:hidden;
+	height:90px;
+	display:block;
+	position:fixed;
+	bottom:5px;
+	left:49%;
+	z-index:90;
 	height:40px;
 }
 .notification{
-	width:20%;
-	color:red;
+	width:200px;
+	background-color:white;
+	margin:auto;
 	display:block;
+	border-radius: 40px 40px 40px 40px;
+	-moz-border-radius: 40px 40px 40px 40px;
+	-webkit-border-radius: 40px 40px 40px 40px;
+	border: 4px solid #a5ffd2;
+	text-align:center;
+}
+span.dismiss {
+    border:2px solid #FFF;
+    padding:0 5px;
+    cursor:pointer;
+    float:right;
+    margin-right:10px;
+	}
+#MainMenu{
+	text-align:center;
+	margin:auto;
+}
+#UpgradeTwo, #UpgradeThree, #UpgradeFour, #UpgradeFive{
+	display:none;
 }
