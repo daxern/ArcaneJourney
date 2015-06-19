@@ -764,12 +764,6 @@ $(document).ready(function() {
 		$(this).parent('li').addClass('actives').siblings().removeClass('actives');
 		e.preventDefault();
 	});
-	$('.triangles .triangle-links a').on('click', function(e) {
-		var currentAttrValue = $(this).attr('href');
-		$('.triangles ' + currentAttrValue).show().siblings().hide();
-		$(this).parent('li').addClass('active1').siblings().removeClass('active1');
-		e.preventDefault();
-	});
 	$("#HideUpgrades").click(function() {
 		$('#upgrades').toggle("slide", {
 			direction: "left"
@@ -781,6 +775,7 @@ $(document).ready(function() {
 		}, 1000);
 	}
 	$(window).resize(resizeText);
+	$("body").tooltip({ selector: '[data-toggle=tooltip]' });
 });
 $(window).load(function() {
 	$('#loader').delay(300).animate({
@@ -797,3 +792,7 @@ var resizeText = function() {
 	var newFontSize = preferredFontSize * scalePercentage;
 	$("#Caster").css("font-size", newFontSize + '%');
 };
+function ChangeName(){
+	var value = $( "#begin-playername" ).val();
+    $( "#Name" ).text( value );
+}
